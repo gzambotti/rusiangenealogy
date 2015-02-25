@@ -14,6 +14,34 @@
         return $(obj).text().toUpperCase().indexOf(meta[3].toUpperCase()) >= 0;
     };
 
+    // Case insensitive and accented characters insensitive
+        $.expr[':'].iacontains = function (obj, index, meta) {
+        var rExps=[
+        {re: /[\xC0-\xC6]/g, ch: "A"},
+        {re: /[\xE0-\xE6]/g, ch: "a"},
+        {re: /[\xC8-\xCB]/g, ch: "E"},
+        {re: /[\xE8-\xEB]/g, ch: "e"},
+        {re: /[\xCC-\xCF]/g, ch: "I"},
+        {re: /[\xEC-\xEF]/g, ch: "i"},
+        {re: /[\xD2-\xD6]/g, ch: "O"},
+        {re: /[\xF2-\xF6]/g, ch: "o"},
+        {re: /[\xD9-\xDC]/g, ch: "U"},
+        {re: /[\xF9-\xFC]/g, ch: "u"},
+        {re: /[\xC7-\xE7]/g, ch: "c"},
+        {re: /[\xD1]/g, ch: "N"},
+        {re: /[\xF1]/g, ch: "n"}
+        ];
+        console.log(rExps)
+        var element = $(obj).text();
+        var search = meta[3];
+        $.each(rExps, function() {
+        element = element.replace(this.re, this.ch);
+        search = search.replace(this.re, this.ch);
+        });
+        return element.toUpperCase().indexOf(search.toUpperCase()) > 0;
+    };
+
+
     var Selectpicker = function(element, options, e) {
         if (e) {
             e.stopPropagation();

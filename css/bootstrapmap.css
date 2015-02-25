@@ -216,3 +216,7 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
   margin-top: 10px;
   margin-left: 10px;
 }    
+.tooltip.top {
+    margin-top: 50px;
+    padding: 5px 0;
+}
