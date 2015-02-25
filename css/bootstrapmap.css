@@ -220,3 +220,21 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
     margin-top: 50px;
     padding: 5px 0;
 }
+
+.selectSlider{
+  margin-top: 12px;
+  margin-left: 20px;
+}
+
+#sliderLabelLeft{
+  margin-right: 10px;
+  color: #fff;
+}
+#sliderLabelRight{
+  margin-left: 5px;
+  color: #fff;
+}
+
+#hSlider {
+  background: yellow;
+}

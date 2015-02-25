@@ -42,7 +42,7 @@ dojo.ready(function () {
 
 var map, featureLayer;
 var basemapURL = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genbasemap/MapServer";
-var husbandwifeLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife1/MapServer/0";
+var husbandwifeLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife/MapServer/0";
 
 require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/graphic", 
   "esri/symbols/SimpleLineSymbol","esri/symbols/SimpleFillSymbol","esri/renderers/UniqueValueRenderer",
@@ -117,7 +117,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
         if ( g.attributes.HusbandNam == $('select option:selected').text() ) {    
           // to do change to real shape lenght
           console.log(g.attributes.Shape_Leng)
-          if(g.attributes.Shape_Leng == 0){            
+          if(g.attributes.Shape_Length < 10){            
             // create the attributes for the graphic
             var circleAttributes = { 
               HusbandNam: g.attributes.HusbandNam, 
@@ -129,7 +129,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
             };
             var husbandPoint = {"geometry":{"points":[[g.attributes.HusbandX, g.attributes.HusbandY]],"spatialReference":4326},"attributes":circleAttributes,"symbol":{"color":[255,255,0,185],
             "size":14,"angle":0,"xoffset":0,"yoffset":0,"type":"esriSMS","style":"esriSMSCircle",
-            "outline":{"color":[204,225,0,255],"width":2,"type":"esriSLS","style":"esriSLSSolid"}}};
+            "outline":{"color":[204,225,0],"width":2,"type":"esriSLS","style":"esriSLSSolid"}}};
 
             var gHusbandPoint = new Graphic(husbandPoint);
             map.graphics.add(gHusbandPoint);           
@@ -143,7 +143,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
               WifePlace: g.attributes.WifePlace,
               YearofMarr: g.attributes.YearofMarr,
             };
-            var husbandLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,0,150]), 4);
+            var husbandLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,0,.7]), 4);
             var gHusbandLine = new Graphic(g.geometry,husbandLine,lineAttributes);
             map.graphics.add(gHusbandLine); 
           }          
