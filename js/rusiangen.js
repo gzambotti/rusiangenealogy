@@ -149,8 +149,9 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
       updateArray();
       var minY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[0];
       var maxY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[1];
-      $("#sliderLabelRight").contents()[0].nodeValue = maxY;
-      $("#sliderLabelLeft").contents()[0].nodeValue = "Years: " + minY;
+      //$("#sliderLabelRight").contents()[0].nodeValue = maxY;
+      //$("#sliderLabelLeft").contents()[0].nodeValue = "Years: " + minY;
+      $(".dropdown-toggle").contents()[1].nodeValue = " Years: " + minY + "-" + maxY;
       featureLayer.setDefinitionExpression("year >= " + minY+ "AND year <=" + maxY);            
     }
 

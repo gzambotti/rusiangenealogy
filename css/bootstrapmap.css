@@ -223,17 +223,10 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
 }
 
 .selectSlider{
-  margin-top: 12px;
-  margin-left: 20px;
+  height: 250px;  
+  width: 40px;
+  
 }
 
-#sliderLabelLeft{
-  margin-right: 10px;
-  color: #fff;
-}
-#sliderLabelRight{
-  margin-left: 5px;
-  color: #fff;
-}
+#hSlider{height: 80%;}
 
-#hSlider{width:150px;}
