@@ -51,9 +51,7 @@ dojo.ready(function () {
   $('.dropdown-toggle').dropdown();
   $('.selectpicker').selectpicker();
   $("#hSlider").slider({});
-  //var slider = new Slider('#ex2', {});
   
-
   $("#about").click(function(e){
     $("#aboutModal").modal("show"); 
     $("body").css("margin-right","0px");
@@ -70,12 +68,15 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
   "esri/layers/ArcGISTiledMapServiceLayer", "esri/geometry/Point", "dojo/on", "dojo/domReady!"], 
   function(Map, BootstrapMap, FeatureLayer, Legend, Graphic, SimpleLineSymbol, SimpleFillSymbol, UniqueValueRenderer, ArcGISTiledMapServiceLayer, Point, on) {   
     
-    map = BootstrapMap.create("mapDiv",{center: [25, 53.4],zoom: 5});        
+    map = BootstrapMap.create("mapDiv",{center: [25, 53.4],zoom: 4});        
     var basemap = new ArcGISTiledMapServiceLayer(basemapURL);    
     dojo.connect(map, "onLoad", initOperationalLayersFirst);
     dojo.connect(map, 'onZoomEnd', function() {      
       var maxOffset = calcOffset();
-      featureLayer.setMaxAllowableOffset(maxOffset);      
+      featureLayer.setMaxAllowableOffset(maxOffset);
+      console.log(map.getZoom())
+      if(map.getZoom() < 4){map.setZoom(4);}
+      if(map.getZoom() > 8){map.setZoom(8);}
     });
     
     
@@ -97,12 +98,50 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
         featureLayer.setRenderer(renderer);      
         featureLayer.setOpacity(.9);        
         map.addLayer(featureLayer);
-        // to do improve the click tollerance
-        featureLayer.on("click", function(evt){        
-          $('select').val(evt.graphic.attributes.HusbandNam);
-          $('.selectpicker').selectpicker('refresh');
-          husbandSelection();       
+        dojo.connect(map, "onClick", function(e) {
+          map.graphics.clear();
+          var centerPoint = new esri.geometry.Point(e.mapPoint.x,e.mapPoint.y,e.mapPoint.spatialReference);
+          var mapWidth = map.extent.getWidth();
+          //Divide width in map units by width in pixels
+          var pixelWidth = mapWidth/map.width;
+          //Calculate a 10 pixel envelope width (5 pixel tolerance on each side)
+          var tolerance = 10 * pixelWidth;
+          //Build tolerance envelope and set it as the query geometry
+          var queryExtent = new esri.geometry.Extent(1,1,tolerance,tolerance,e.mapPoint.spatialReference);
+          queryExtent.geometry = queryExtent.centerAt(centerPoint);
+          var select = featureLayer.selectFeatures(queryExtent, esri.layers.FeatureLayer.SELECTION_NEW);
+          //console.log("query: ", query, select);
+          select.then(function(features) {
+              //var t = features;
+              if($(".alert").length > 0){
+                for (var i = $(".alert").length - 1; i >= 0; i--) {
+                  $(".alert")[i].remove();
+                };
+              }
+              // remove alert if open
+              var bootstrap_alert = function() {};
+              for (var i = features.length - 1; i >= 0; i--) {
+                console.log("select features result: ", features[i].attributes.HusbandNam);                
+                bootstrap_alert.info = function(message) {
+                    $('#alert_placeholder').append('<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times</button><span>'+message+'</span></div>')
+                }        
+                bootstrap_alert.info("<ul class='alertCountryInfo'><li><b>Husband:</b> " + features[i].attributes.HusbandNam + "</li><li><b>Place:</b> " + features[i].attributes.HusbandPla + "</li><li><b>Wife:</b> " + features[i].attributes.WifeName + "</li><li><b>Place:</b> " + features[i].attributes.WifePlace + "</li><li><b>Year of Marriage:</b> " + features[i].attributes.YearofMarr + "</li><li><a href='" + features[i].attributes.HusbandPag + "' target=\"_blank\">http://genealogy.obdurodon.org</a></li></ul>");
+                ;
+                //this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+              };
+              console.log(features)
+              if(features.length > 0){
+                var husbandLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,0,.7]), 4);
+                var gHusbandLine = new Graphic(features[0].geometry,husbandLine);
+                map.graphics.add(gHusbandLine);
+              }              
+          }, function(err) {
+            console.log("select features error: ", err);
+          });
         });
+          
+        // click on feature layers
+        
         /*        
         // create a legend    
         var legendDijit = new Legend({
@@ -116,7 +155,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
         legendDijit.startup();
         */    
     }
-    
+
     // slider update data and menu once it stops
     $('#hSlider').slider().on('slideStop', function(evt){      
       hSlideQuery();
