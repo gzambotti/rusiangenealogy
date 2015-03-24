@@ -116,29 +116,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
         legendDijit.startup();
         */    
     }
-
-    /*$('#hSlider').slider().on('slide', function(evt){
-      var minY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[0];
-      var maxY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[1];
-      dojo.forEach(featureLayer.graphics, function(g) {        
-        //console.log(g.attributes.HusbandNam, minY, maxY);
-        if ( g.attributes.year >= minY && g.attributes.year <= maxY ) {
-          $('#dropDownCountry').children('option[value="'+ g.attributes.HusbandNam+'"]').show();
-          $('#dropDownPlace').children('option[value="'+ g.attributes.HusbandPla+'"]').show();
-          //$('#dropDownPlace').children('option[value="'+ g.attributes.WifePlace+'"]').show();
-          //g.show();
-        } else {          
-          
-          $('#dropDownCountry').children('option[value="'+ g.attributes.HusbandNam+'"]').hide();
-          $('#dropDownPlace').children('option[value="'+ g.attributes.HusbandPla+'"]').hide();
-          //$('#dropDownPlace').children('option[value="'+ g.attributes.WifePlace+'"]').hide();          
-          //g.hide();
-        }        
-      });
-      
-      $('.selectpicker').selectpicker('refresh');
-    }); 
-    */
+    
     // slider update data and menu once it stops
     $('#hSlider').slider().on('slideStop', function(evt){      
       hSlideQuery();
@@ -171,6 +149,8 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
       updateArray();
       var minY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[0];
       var maxY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[1];
+      $("#sliderLabelRight").contents()[0].nodeValue = maxY;
+      $("#sliderLabelLeft").contents()[0].nodeValue = "Years: " + minY;
       featureLayer.setDefinitionExpression("year >= " + minY+ "AND year <=" + maxY);            
     }
 

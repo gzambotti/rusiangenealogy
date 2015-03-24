@@ -236,6 +236,4 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
   color: #fff;
 }
 
-#hSlider {
-  background: yellow;
-}
+#hSlider{width:150px;}
