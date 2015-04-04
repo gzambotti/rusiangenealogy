@@ -23,11 +23,9 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="css/fullmap-template.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/slider.css" rel="stylesheet">
-    
-    
+    <link rel="stylesheet" type="text/css" href="css/slider.css" rel="stylesheet">    
     <!-- Bootstrap-map-js -->
-    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.12/esri/css/esri.css"> 
+    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css"> 
     <link rel="stylesheet" type="text/css" href="css/bootstrapmap.css">   
     <style type="text/css">
       #mapDiv {
@@ -59,7 +57,18 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">            
             <li class="active"><a id="about" href="#"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>          
-            
+            <li class="dropdown">              
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span></a>
+              <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">                
+                  <div class="checkLayer">
+                    <div class="checkbox checkbox-primary">
+                        <input id="checkbox2" type="checkbox"><label for="checkbox2">Countries</label>
+                    </div>
+
+
+                  </div>
+              </div>
+            </li>
             <li class="dropdown">              
               <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-time"></span> Years:  980-1290</a>
               <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">                
@@ -115,7 +124,7 @@
             }]
         };
     </script>
-    <script src="http://js.arcgis.com/3.12/"></script>
+    <script src="http://js.arcgis.com/3.13/"></script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

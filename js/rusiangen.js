@@ -60,33 +60,86 @@ dojo.ready(function () {
 });
 
 var map, featureLayer;
-var basemapURL = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genbasemap/MapServer";
-var husbandwifeLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife/MapServer/0";
+var basemapURL = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/basemap/MapServer";
+var placeLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife/MapServer/0";
+var husbandwifeLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife/MapServer/1";
+var countryLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife/MapServer/2";
 
-require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/graphic", 
-  "esri/symbols/SimpleLineSymbol","esri/symbols/SimpleFillSymbol","esri/renderers/UniqueValueRenderer",
-  "esri/layers/ArcGISTiledMapServiceLayer", "esri/geometry/Point", "dojo/on", "dojo/domReady!"], 
-  function(Map, BootstrapMap, FeatureLayer, Legend, Graphic, SimpleLineSymbol, SimpleFillSymbol, UniqueValueRenderer, ArcGISTiledMapServiceLayer, Point, on) {   
+
+require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/graphic", "esri/symbols/SimpleMarkerSymbol",
+  "esri/symbols/SimpleLineSymbol","esri/symbols/SimpleFillSymbol","esri/renderers/UniqueValueRenderer", "esri/renderers/SimpleRenderer",
+  "esri/layers/ArcGISTiledMapServiceLayer", "esri/geometry/Point", "dojo/on", "esri/symbols/TextSymbol","esri/layers/LabelLayer", "esri/Color","dojo/domReady!"], 
+  function(Map, BootstrapMap, FeatureLayer, Legend, Graphic, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, UniqueValueRenderer, SimpleRenderer,
+    ArcGISTiledMapServiceLayer, Point, on, TextSymbol, LabelLayer, Color) {   
     
-    map = BootstrapMap.create("mapDiv",{center: [25, 53.4],zoom: 4});        
+    map = BootstrapMap.create("mapDiv",{center: [25, 53.4],zoom: 4, smartNavigation: true});        
+    
     var basemap = new ArcGISTiledMapServiceLayer(basemapURL);    
+    
     dojo.connect(map, "onLoad", initOperationalLayersFirst);
+    dojo.connect(map, "onLoad", initOperationalLayersSecond);
     dojo.connect(map, 'onZoomEnd', function() {      
       var maxOffset = calcOffset();
       featureLayer.setMaxAllowableOffset(maxOffset);
       console.log(map.getZoom())
       if(map.getZoom() < 4){map.setZoom(4);}
       if(map.getZoom() > 8){map.setZoom(8);}
-    });
-    
-    
+    });    
     
     map.addLayer(basemap);
 
-    function calcOffset() {return (map.extent.getWidth() / map.width);} 
+    var sCnty = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,new esri.Color([152,152,152]), 1);
+    var rsCnty = new UniqueValueRenderer(sCnty);    
+    var featureCntyLayer = new FeatureLayer(countryLayer, {
+          mode: FeatureLayer.MODE_SNAPSHOT,
+          outFields: ["CNTRY_NAME"]
+    });
+    featureCntyLayer.setRenderer(rsCnty);
+
+    var statesColor = new Color("#666");
+    var statesLabel = new TextSymbol().setColor(statesColor);
+    statesLabel.font.setSize("8pt");
+    statesLabel.font.setFamily("arial");
+    statesLabel.font.setStyle("italic");
+    var statesLabelRenderer = new SimpleRenderer(statesLabel);
+    var labels = new LabelLayer({ id: "labels_cnty" });
+    labels.addFeatureLayer(featureCntyLayer, statesLabelRenderer, "{CNTRY_NAME}");
+    // add country layer    
+    
+    $('#checkbox2').click(function () {
+      console.log(this.checked);
+      if(this.checked == true){map.addLayer(featureCntyLayer);map.addLayer(labels);}
+      else{map.removeLayer(featureCntyLayer);map.removeLayer(labels);}  
+    });  
+
+    function calcOffset() {return (map.extent.getWidth() / map.width);}
+
+    function initOperationalLayersSecond(){
+      var sPlace = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE,6,new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, 
+            new Color([250, 0, 0, 1]),1),new Color([250, 0, 0, 1]));
+      var rsPlace = new UniqueValueRenderer(sPlace);    
+      var featurePlaceLayer = new FeatureLayer(placeLayer, {
+            mode: FeatureLayer.MODE_SNAPSHOT,
+            outFields: ["name_stylesheet"]          
+      });
+      featurePlaceLayer.setRenderer(rsPlace);
+
+      map.addLayer(featurePlaceLayer);
+      var placeColor = new Color("#ff0000");
+      var placeLabel = new TextSymbol().setColor(placeColor);
+      placeLabel.font.setSize("8pt");
+      placeLabel.font.setFamily("arial");
+      placeLabel.font.setStyle("italic");
+      var placeLabelRenderer = new SimpleRenderer(placeLabel);
+      var pLabels = new LabelLayer({ id: "labels_place" });
+      pLabels.addFeatureLayer(featurePlaceLayer, placeLabelRenderer, "{name_stylesheet}");
+      map.addLayer(pLabels);
+          // add place layer  
+    } 
 
     function initOperationalLayersFirst() {
-        var sls = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SHORTDOT,new esri.Color([80,80,80]), 2.5);
+        map.enableScrollWheelZoom();        
+        var sls = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SHORTDOT,new esri.Color([80,80,80]), 2.5);
         var renderer = new UniqueValueRenderer(sls, "HusbandNam");
         featureLayer = new FeatureLayer(husbandwifeLayer, {
           mode: FeatureLayer.MODE_SNAPSHOT,
@@ -95,10 +148,13 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
           supportsAdvancedQueries: true
         });      
         
-        featureLayer.setRenderer(renderer);      
+        featureLayer.setRenderer(renderer);
+        //featureLayer.setSelectionSymbol(fieldsSelectionSymbol);      
         featureLayer.setOpacity(.9);        
         map.addLayer(featureLayer);
+        var graphicAttributes;
         dojo.connect(map, "onClick", function(e) {
+          console.log(e.graphic)
           map.graphics.clear();
           var centerPoint = new esri.geometry.Point(e.mapPoint.x,e.mapPoint.y,e.mapPoint.spatialReference);
           var mapWidth = map.extent.getWidth();
@@ -112,6 +168,10 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
           var select = featureLayer.selectFeatures(queryExtent, esri.layers.FeatureLayer.SELECTION_NEW);
           //console.log("query: ", query, select);
           select.then(function(features) {
+              //map.infoWindow.setFeatures(features);
+                
+              //map.infoWindow.setContent(features[0].attributes.HusbandNam)
+              //map.infoWindow.show(e.mapPoint);
               //var t = features;
               if($(".alert").length > 0){
                 for (var i = $(".alert").length - 1; i >= 0; i--) {
@@ -121,7 +181,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
               // remove alert if open
               var bootstrap_alert = function() {};
               for (var i = features.length - 1; i >= 0; i--) {
-                console.log("select features result: ", features[i].attributes.HusbandNam);                
+                //console.log("select features result: ", features[i].attributes.HusbandNam);                
                 bootstrap_alert.info = function(message) {
                     $('#alert_placeholder').append('<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times</button><span>'+message+'</span></div>')
                 }        
@@ -129,31 +189,17 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
                 ;
                 //this will automatically close the alert and remove this if the users doesnt close it in 5 secs
               };
-              console.log(features)
+              //console.log(features)
+
               if(features.length > 0){
                 var husbandLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,0,.7]), 4);
                 var gHusbandLine = new Graphic(features[0].geometry,husbandLine);
                 map.graphics.add(gHusbandLine);
-              }              
+              }             
           }, function(err) {
             console.log("select features error: ", err);
           });
         });
-          
-        // click on feature layers
-        
-        /*        
-        // create a legend    
-        var legendDijit = new Legend({
-          map: map,
-          layerInfos: [{
-            "defaultSymbol": false,
-            "layer": featureLayer,
-            "title": " "
-              }]
-            }, "legendDiv");
-        legendDijit.startup();
-        */    
     }
 
     // slider update data and menu once it stops
