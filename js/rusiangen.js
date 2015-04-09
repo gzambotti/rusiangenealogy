@@ -48,7 +48,19 @@ dojo.ready(function () {
     $('#dropDownPlace').append( $('<option></option>').val(text).html(text));
   });
   
-  $('.dropdown-toggle').dropdown();
+  //$('.dropdown-toggle').dropdown();
+  //$('.dropdown-menu').dropdown('toggle');
+
+  $('.dropdown-menu').on('hide.bs.dropdown', function () {
+    return false;
+  });
+/*
+  $('.dropdown-menu').on('show.bs.dropdown', function () {
+    console.log('show')
+  })*/
+
+  
+  
   $('.selectpicker').selectpicker();
   $("#hSlider").slider({});
   
@@ -57,6 +69,8 @@ dojo.ready(function () {
     $("body").css("margin-right","0px");
     $(".navbar").css("margin-right","0px");          
   });
+
+  
 });
 
 var map, featureLayer;
@@ -97,10 +111,11 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
     featureCntyLayer.setRenderer(rsCnty);
 
     var statesColor = new Color("#666");
-    var statesLabel = new TextSymbol().setColor(statesColor);
+    var statesLabel = new TextSymbol().setColor(statesColor);    
     statesLabel.font.setSize("8pt");
     statesLabel.font.setFamily("arial");
     statesLabel.font.setStyle("italic");
+
     var statesLabelRenderer = new SimpleRenderer(statesLabel);
     var labels = new LabelLayer({ id: "labels_cnty" });
     labels.addFeatureLayer(featureCntyLayer, statesLabelRenderer, "{CNTRY_NAME}");
@@ -124,12 +139,19 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
       });
       featurePlaceLayer.setRenderer(rsPlace);
 
+                    
       map.addLayer(featurePlaceLayer);
       var placeColor = new Color("#ff0000");
-      var placeLabel = new TextSymbol().setColor(placeColor);
+      var placeLabel = new TextSymbol().setColor(placeColor).setOffset(4,-10).setAlign(TextSymbol.ALIGN_START);
+      //placeLabel.setHorizontalAlignment('right')
+      
+      //placeLabel.setOffset(3,3);
       placeLabel.font.setSize("8pt");
       placeLabel.font.setFamily("arial");
       placeLabel.font.setStyle("italic");
+      //placeLabel.font.setOffset(0,50);
+      //placeLabel.setAngle(0);
+      //placeLabel.setOffset(0,50);
       var placeLabelRenderer = new SimpleRenderer(placeLabel);
       var pLabels = new LabelLayer({ id: "labels_place" });
       pLabels.addFeatureLayer(featurePlaceLayer, placeLabelRenderer, "{name_stylesheet}");
