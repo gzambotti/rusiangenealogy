@@ -1,33 +1,31 @@
-// Giovanni Zambotti - g.zambotti@gmail.com -- 2/24/2015
+// Giovanni Zambotti - g.zambotti@gmail.com -- 5/11/2015
 
 // HusbandPla LIKE 'R%'  OR WifePlace LIKE 'R%'
 //'use strict';
 
-var husbandArray =  ["Adalbert of Babenberg", "Almos of Hungary", "Andrej Volodimerič", "Andrew of Hungary", 
-  "Baškord of the Polovcians", "Béla I of Hungary", "Béla II of Hungary", "Bolesław \"the Tall\" of Poland", 
-  "Bolesław II of Poland", "Bolesław III of Poland", "Bolesław IV of Poland", "Boris Kolomanovič", "Brjačeslav Davidič", 
-  "Casimir \"the Restorer\" of Poland", "Cuno of Beichlingen", "Edward \"the Exile\" of England", "Eric Emune of Denmark", 
-  "Erling Skaki of Norway", "Géza II of Hungary", "Glěb Jurevič", "Glěb Rostislavič", "Glěb Vseslavič", 
-  "Gunther Count of Keffenberg", "Harald \"Hardrada\" Sigurtharsson of Norway", "Henry I Capet", 
-  "Henry III \"the Long\" of Stade", "Henry IV of the German Empire", "Hugh of Vermandois", 
-  "Iakus of Miechów", "Izjaslav Jaroslavič", "Izjaslav M′stislavič", "Jaropolk Izjaslavič", "Jaropolk Svjatoslavič", 
-  "Jaropolk Volodimerič", "Jaroslav \"Mudryj\" Volodimerič", "Jaroslav Svjatopolčič", "Jaroslav Volodimerkovič", 
-  "Jurij \"Dolgorukij\" Volodimerič", "Jurij Jaroslavič", "Knud Lavard Ericsson", "Koloman of Hungary", 
-  "Ladislaus of Hungary", "Leo Diogenes of Byzantium", "M′stislav Harald Volodimerič", 
-  "M′stislav Jurevič", "Magnus \"the Blind\" Sigurdsson of Norway", 
-  "Malcolm III of Scotland", "Mieszko II of Poland", "Mieszko of Poland", "N. N. of Byzantium", "Olav Sveinsson", 
-  "Oleg Svjatoslavič", "Philip of France", "Piotr Wlostowic", 
-  "Raoul de Crepy", "Rogvolod Borisič", "Roman Rostislavič", "Roman Volodimerič", "Rostislav Glěbovič", 
-  "Rostislav Volodimerič", "Salomon of Hungary", "Sigurd \"the Crusader\" of Norway", "Soběslav of Bohemia", 
-  "Stig Whiteskin of Denmark", "Svjatopolk M′stislavič", "Svjatoslav Jaroslavič", "Svjatoslav Ol′govič", 
-  "Svjatoslav Volodimerič", "Svjatoslav Vsevolodič", "Volodimer Davidič", "Volodimer Monomax Vsevolodič", 
-  "Volodimer Svjatoslavič", "Volodimer Vsevolodič", "Volodimerko Volodarič", "Vratislav II of Bohemia", 
-  "Vratislav of Bohemia", "Vsevolod \"Big Nest\" Jurevič", 
-  "Vsevolod Jaroslavič", "Vsevolod Ol′govič", "Vsevolod Svjatoslavič", "Vsevolodko Davidič", "Władysław Herman", "Władysław II of Poland"];
+var husbandArray =  ['Adalbert of Babenberg','Almos of Hungary','Andrei Volodimerich','Andrew of Hungary','Bashkord of the Polovtsy','Bela I of Hungary'
+,'Bela II of Hungary','Boleslaw \"the Tall\" of Poland','Boleslaw II of Poland','Boleslaw III of Poland','Boleslaw IV of Poland'
+,'Boris Kolomanovich','Briacheslav Davidich','Casimir \"the Restorer\" of Poland','Cuno of Beichlingen'
+,'Edward \"the Exile\" of England','Eric Emune of Denmark','Erling Skaki of Norway','Geza II of Hungary','Gleb Iurevich'
+,'Gleb Rostislavich','Gleb Vseslavich','Gunther Count of Keffenberg','Harald \"Hardrada\" Sigurtharsson of Norway'
+,'Henry I Capet','Henry III \"the Long\" of Stade','Henry IV of the German Empire','Hugh of Vermandois'
+,'Iakus of Mekhov','Iaropolk Iziaslavich','Iaropolk Sviatoslavich','Iaropolk Volodimerich','Iaroslav \"Mudryi\" Volodimerich'
+,'Iaroslav Sviatopolchich','Iaroslav Vladimirkovich','Iurii \"Dolgorukii\" Volodimerich','Iurii Iaroslavich'
+,'Iziaslav Iaroslavich','Iziaslav Mstislavich','Knud Lavard Ericsson','Koloman of Hungary','Ladislaus of Hungary'
+,'Leo Diogenes of Byzantium','Magnus \"the Blind\" Sigurdsson of Norway','Malcolm III of Scotland'
+,'Mieszko II of Poland','Mieszko of Poland','Mstislav Harald Volodimerich','Mstislav Iurevich'
+,'N. N. of Byzantium','Olav Sveinsson','Oleg Sviatoslavich','Philip of France','Piotr Wlostowic'
+,'Raoul de Crepy','Rogvolod Borisich','Roman Rostislavich','Roman Volodimerich','Rostislav Glebovich','Rostislav Volodimerich'
+,'Salomon of Hungary','Sigurd \"the Crusader\" of Norway','Sobeslav of Bohemia','Stig Whiteskin of Denmark','Sviatopolk Mstislavich'
+,'Sviatoslav Iaroslavich','Sviatoslav Olgovich','Sviatoslav Volodimerich','Sviatoslav Vsevolodich','Vladimir Monomakh Vsevolodich'
+,'Vladimirko Volodarich','Volodimer Davidich','Volodimer Sviatoslavich','Volodimer Vsevolodich','Vratislav II of Bohemia'
+,'Vratislav of Bohemia','Vsevolod \"Big Nest\" Iurevich','Vsevolod Iaroslavich','Vsevolod Olgovich','Vsevolod Sviatoslavich'
+,'Vsevolodko Davidich','Wladyslaw Herman','Wladyslaw II of Poland'];
   
-  var placesArray = ["Bamberg","Bilhorod","Bryansk","Busk","Chernihiv","Constantinople","Cracow","Denmark","Dorohobuzh","Edinburgh","Esztergom",
+var placesArray = ["Bamberg","Bilhorod","Bryansk","Busk","Chernihiv","Constantinople","Cracow","Denmark","Dorohobuzh","Edinburgh","Esztergom",
   "Gniezno","Halych","Kyiv","London","Mainz","Minsk","Norway","Novgorod","Novhorod-Sivers\'kyi",
-  "Paris","Pereyaslav","Polack","Polovtsy","Przemyśl","Ryazan","Schleswig","Smolensk","Turov","Vermandois","Vladimir-Suzdal","Volodymyr"];
+  "Paris","Pereyaslav","Polack","Polovtsy","Przemyśl","Ryazan","Schleswig","Smolensk","Turov","Vermandois","Vladimir-Suzdal","Volodymyr",
+  "Byzantium","Denmark","England","France","German Empire","Hungary","Ossetia","Poland","Rus\'","Scotland","Serbia","Sweden"];
 
 dojo.ready(function () {
   // to do -- try to create the pulldown automaticaly right now the array has to be updated if data changes 
@@ -39,7 +37,7 @@ dojo.ready(function () {
   "Stockholm","Turov","Vermandois","Vladimir-Suzdal","Volodymyr","Vyshhorod"
   */
   $.each(husbandArray, function(val, text) {
-    //$('select option:contains("Adalbert of Babenberg")').prop('selected',true);
+    $('select option:contains("Adalbert of Babenberg")').prop('selected',true);
     $('#dropDownCountry').append( $('<option></option>').val(text).html(text));
   });
 
@@ -51,17 +49,23 @@ dojo.ready(function () {
   //$('.dropdown-toggle').dropdown();
   //$('.dropdown-menu').dropdown('toggle');
 
-  $('.dropdown-menu').on('hide.bs.dropdown', function () {
+  /*$('.dropdown-menu').on('hide.bs.dropdown', function () {    
     return false;
-  });
-/*
-  $('.dropdown-menu').on('show.bs.dropdown', function () {
-    console.log('show')
-  })*/
+  });*/
 
+  /*$("#foo").click(function(e){
+    //do something
+    //e.preventDefault();
+    console.log("foo")
+    $('.selectpicker').selectpicker('show');
+  });
+  */
   
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+    $('.selectpicker').selectpicker('mobile');
+  }
+  else{$('.selectpicker').selectpicker();}
   
-  $('.selectpicker').selectpicker();
   $("#hSlider").slider({});
   
   $("#about").click(function(e){
@@ -164,6 +168,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
         var sls = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SHORTDOT,new esri.Color([80,80,80]), 2.5);
         var renderer = new UniqueValueRenderer(sls, "HusbandNam");
         featureLayer = new FeatureLayer(husbandwifeLayer, {
+          id: "husband_graphic",
           mode: FeatureLayer.MODE_SNAPSHOT,
           maxAllowableOffset: calcOffset(),
           outFields: ["*"],
@@ -173,8 +178,8 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
         featureLayer.setRenderer(renderer);
         //featureLayer.setSelectionSymbol(fieldsSelectionSymbol);      
         featureLayer.setOpacity(.9);        
-        map.addLayer(featureLayer);
-        var graphicAttributes;
+        map.addLayer(featureLayer);        
+
         dojo.connect(map, "onClick", function(e) {
           console.log(e.graphic)
           map.graphics.clear();
@@ -276,15 +281,15 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
     // looking for a change of the HUSBAND dropdown menu
     $('#dropDownPlace').on('change', function(){placeSelection();});
     // looking for a change of the PLACE dropdwon menu
+    
     function husbandSelection(){
       map.graphics.clear();
       var minY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[0];
-      var maxY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[1]; 
-      console.log(minY,maxY)
-      dojo.forEach(featureLayer.graphics, function(g) {        
-        if ( g.attributes.HusbandNam == $('select option:selected')[0].value && (g.attributes.year >= minY && g.attributes.year <= maxY)) {    
+      var maxY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[1];       
+      dojo.forEach(featureLayer.graphics, function(g) {                
+        if ( g.attributes.HusbandNam == $('select option:selected')[0].value && (g.attributes.Year >= minY && g.attributes.Year <= maxY)) {    
           // to do change to real shape lenght
-          console.log(g.attributes);
+          //console.log(g.attributes);
           if(g.attributes.Shape_Length < 10){            
             // create the attributes for the graphic
             var circleAttributes = { 
@@ -319,20 +324,22 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
         // dropdown HUSBAND function
         // mouse-over on graphic
         dojo.connect(map.graphics, "onMouseOver", function(evt) {          
-          console.log(evt.graphic.attributes.HusbandNam)
-          var bootstrap_alert = function() {};        
-          bootstrap_alert.info = function(message) {
-              $('#alert_placeholder').html('<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times</button><span>'+message+'</span></div>')
-          }        
-          bootstrap_alert.info("<ul class='alertCountryInfo'><li><b>Husband:</b> " + evt.graphic.attributes.HusbandNam + "</li><li><b>Place:</b> " + evt.graphic.attributes.HusbandPla + "</li><li><b>Wife:</b> " + evt.graphic.attributes.WifeName + "</li><li><b>Place:</b> " + evt.graphic.attributes.WifePlace + "</li><li><b>Year of Marriage:</b> " + evt.graphic.attributes.YearofMarr + "</li><li><a href='" + evt.graphic.attributes.HusbandPag + "' target=\"_blank\">http://genealogy.obdurodon.org</a></li></ul>");
-        });          
+          if (typeof(evt.graphic.attributes) != "undefined"){
+            var bootstrap_alert = function() {};        
+            bootstrap_alert.info = function(message) {
+               $('#alert_placeholder').html('<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times</button><span>'+message+'</span></div>')
+            }        
+            bootstrap_alert.info("<ul class='alertCountryInfo'><li><b>Husband:</b> " + evt.graphic.attributes.HusbandNam + "</li><li><b>Place:</b> " + evt.graphic.attributes.HusbandPla + "</li><li><b>Wife:</b> " + evt.graphic.attributes.WifeName + "</li><li><b>Place:</b> " + evt.graphic.attributes.WifePlace + "</li><li><b>Year of Marriage:</b> " + evt.graphic.attributes.YearofMarr + "</li><li><a href='" + evt.graphic.attributes.HusbandPag + "' target=\"_blank\">http://genealogy.obdurodon.org</a></li></ul>");
+          } 
+        });                 
       });
     }
 
     function placeSelection(){
       map.graphics.clear();
       dojo.forEach(featureLayer.graphics, function(g) {        
-        if ( g.attributes.HusbandPla == $('select option:selected')[1].value || g.attributes.WifePlace == $('select option:selected')[1].value) {    
+        if ( g.attributes.HusbandPla == $('select option:selected')[1].value || g.attributes.WifePlace == $('select option:selected')[1].value 
+            || g.attributes.HusbandKing == $('select option:selected')[1].value || g.attributes.WifeKingdo == $('select option:selected')[1].value) {    
           // to do change to real shape lenght
           console.log(g.attributes);
           if(g.attributes.Shape_Length < 10){            
@@ -369,11 +376,13 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
         
         // mouse-over on graphic
         dojo.connect(map.graphics, "onMouseOver", function(evt) {          
+          if (typeof(evt.graphic.attributes) != "undefined"){
           var bootstrap_alert = function() {};        
           bootstrap_alert.info = function(message) {
               $('#alert_placeholder').html('<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times</button><span>'+message+'</span></div>')
           }        
           bootstrap_alert.info("<ul class='alertCountryInfo'><li><b>Husband:</b> " + evt.graphic.attributes.HusbandNam + "</li><li><b>Place:</b> " + evt.graphic.attributes.HusbandPla + "</li><li><b>Wife:</b> " + evt.graphic.attributes.WifeName + "</li><li><b>Place:</b> " + evt.graphic.attributes.WifePlace + "</li><li><b>Year of Marriage:</b> " + evt.graphic.attributes.YearofMarr + "</li><li><a href='" + evt.graphic.attributes.HusbandPag + "' target=\"_blank\">http://genealogy.obdurodon.org</a></li></ul>");
+          }
         });          
       });
     }
