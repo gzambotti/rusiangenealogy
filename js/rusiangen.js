@@ -142,11 +142,10 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
             outFields: ["name_stylesheet"]          
       });
       featurePlaceLayer.setRenderer(rsPlace);
-
                     
       map.addLayer(featurePlaceLayer);
       var placeColor = new Color("#ff0000");
-      var placeLabel = new TextSymbol().setColor(placeColor).setOffset(4,-10).setAlign(TextSymbol.ALIGN_START);
+      var placeLabel = new TextSymbol().setColor(placeColor).setOffset(-5,-17).setAlign(TextSymbol.ALIGN_START);
       //placeLabel.setHorizontalAlignment('right')
       
       //placeLabel.setOffset(3,3);
