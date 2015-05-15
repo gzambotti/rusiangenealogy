@@ -1,6 +1,5 @@
 // Giovanni Zambotti - g.zambotti@gmail.com -- 5/15/2015
 
-// HusbandPla LIKE 'R%'  OR WifePlace LIKE 'R%'
 //'use strict';
 
 var husbandArray =  ['Adalbert of Babenberg','Almos of Hungary','Andrei Volodimerich','Andrew of Hungary','Bashkord of the Polovtsy','Bela I of Hungary'
@@ -77,7 +76,7 @@ dojo.ready(function () {
 });
 
 var map, featureLayer;
-var basemapURL = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/basemap/MapServer";
+var basemapURL = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genbasemap/MapServer";
 var placeLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife/MapServer/0";
 var husbandwifeLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife/MapServer/1";
 var countryLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife/MapServer/2";
