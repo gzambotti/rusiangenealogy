@@ -23,7 +23,9 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="css/fullmap-template.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/slider.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />    
+    <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.css" />
+    <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.skinFlat.css" />    
     <!-- Bootstrap-map-js -->
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css"> 
     <link rel="stylesheet" type="text/css" href="css/bootstrapmap.css">   
@@ -42,7 +44,6 @@
   </head>
 
   <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -58,53 +59,39 @@
           <ul class="nav navbar-nav">            
             <li class="active"><a id="about" href="#"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>          
             <li class="dropdown">              
-              <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span></a>
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span> Modern Boundaries</a>
               <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">                
                   <div class="checkLayer">
                     <div class="checkbox checkbox-primary">
                         <input id="checkbox2" type="checkbox"><label for="checkbox2">Countries</label>
                     </div>
-
-
                   </div>
               </div>
             </li>
             <li class="dropdown">              
-              <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-time"></span></a>
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-time"></span> Time Slider</a>
               <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">                
                   <div class="selectSlider">
-                  <input id="hSlider" type="text" class="span2" value="" data-slider-orientation="vertical" data-slider-min="980" data-slider-max="1209" data-slider-step="1" data-slider-value="[980,1209]" data-slider-tooltip="show"/>            
-                  </div>
-                
+                  <input type="text" id="range" value="" name="range" />
               </div>  
             </li> 
-            <!--  
+              
             <li class="dropdown">              
-              <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Name</a>
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> People</a>
               <div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px;">                
-                  <select id="dropDownCountry" class="selectpicker show-tick show-menu-arrow" data-live-search="true" data-size="5" data-style="btn-inverse"></select>
-                                 
+                <select id="dropDownCountry" class="selectpicker show-tick show-menu-arrow" data-live-search="true" data-size="5" data-style="btn-inverse"><option>Select a Name...</option></select>
               </div>
             </li>
+            
             <li class="dropdown">              
               <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Place</a>
               <div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px;">                
-                  
-                  <select id="dropDownPlace" class="selectpicker " data-live-search="true" data-size="5" data-style="btn-inverse"></select>          
-                
+                <select id="dropDownPlace" class="selectpicker " data-live-search="true" data-size="5" data-style="btn-inverse"><option>Select a Place...</option></select>  
                 
               </div>
             </li>
-            -->
-            <li class="selectCountry"><select id="dropDownCountry" class="selectpicker show-tick show-menu-arrow" data-live-search="true" data-size="5" data-style="btn-inverse"></select></li>
-            <li class="selectCountry"><select id="dropDownPlace" class="selectpicker " data-live-search="true" data-size="5" data-style="btn-inverse"></select></li>
-             
-
-            
-            
-            
-                             
-            
+                        
+           
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -131,7 +118,7 @@
     
     <!-- Bootstrap-map-js -->
     <!--<div id="mapDiv"><div id ="alert_placeholder"></div></div>-->
-    <div id="mapDiv"><div id ="alert_placeholder"></div></div>
+    <div id="mapDiv"><div id="HomeButton"></div><div id ="alert_placeholder"></div></div>
     <script type="text/javascript">
         var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
         var dojoConfig = {
@@ -150,9 +137,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="js/modernizr.js"></script>    
-    <script src="js/bootstrap-select.js"></script>
-    <script src="js/bootstrap-slider.js"></script>
+    <script src="js/ion.rangeSlider.js"></script>      
+    <script src="js/bootstrap-select.js"></script>    
     <script src="js/rusiangen.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-// Giovanni Zambotti - g.zambotti@gmail.com -- 5/11/2015
+// Giovanni Zambotti - g.zambotti@gmail.com -- 5/15/2015
 
 // HusbandPla LIKE 'R%'  OR WifePlace LIKE 'R%'
 //'use strict';
@@ -20,60 +20,59 @@ var husbandArray =  ['Adalbert of Babenberg','Almos of Hungary','Andrei Volodime
 ,'Sviatoslav Iaroslavich','Sviatoslav Olgovich','Sviatoslav Volodimerich','Sviatoslav Vsevolodich','Vladimir Monomakh Vsevolodich'
 ,'Vladimirko Volodarich','Volodimer Davidich','Volodimer Sviatoslavich','Volodimer Vsevolodich','Vratislav II of Bohemia'
 ,'Vratislav of Bohemia','Vsevolod \"Big Nest\" Iurevich','Vsevolod Iaroslavich','Vsevolod Olgovich','Vsevolod Sviatoslavich'
-,'Vsevolodko Davidich','Wladyslaw Herman','Wladyslaw II of Poland'];
+,'Vsevolodko Davidich','Wladyslaw Herman','Wladyslaw II of Poland',
+'Adelaide, daughter of Almos of Hungary','Adele of Vermandois','Adelheid, daughter of Andrew of Hungary','Agafia Iaroslavna'
+,'Agafija Rostislavna','Agafija Volodimerovna','Agnes of the German Empire','Anastasia Iaroslavna'
+,'Anna \"Porphyrogenita\" of Byzantium','Anna Iaroslavna','Bertha of Holland','Bertrada of Anjou','Bulgar Woman','Cunigunda of the German Empire','Dobronega-Maria Volodimerovna','Elena, daughter of the ruler of the Ossetians','Elisabeth Iaroslavna','Evfimiia Volodimerovna'
+,'Evfrosiniia Mstislavna','Evpraksia Vsevolodovna','First Czech woman of Bohemia','Gertrude of Poland','Greek nun of Byzantium'
+,'Gyda Haroldsdottir','Hedwig, daughter of Almos of Hungary','Ingeborg Mstislavna','Ingigerd of Norway','Ingigerd of Sweden','Jelena daughter of Uros I of Serbia','Judith, daughter of Henry III of the German Empire','Judith, daughter of Vratislav II of Bohemia'
+,'Kristin Ingesdottir of Sweden','Kristin Knudsdottir of Denmark','Kristin Sigurdsdottir of Norway'
+,'Lanka daughter of Bela I of Hungary','Malfrid Mstislavna','Margaret of England'
+,'Margret Knudsdottir','Maria Mstislavna','Maria of Ossetia','Maria Sviatopolkovna','Maria Sviatoslavna'
+,'Maria Volodimerovna','Monomaxina','N. N. \"Evdoksia\" Iziaslavna','N. N. \"Olga\" Iurevna','N. N. \"Premislava\" Volodimerovna'
+,'N. N. Andreevna','N. N. Glebovna','N. N. Iaropolkovna','N. N. Iziaslavna','N. N. Jurevna','N. N. Komnena'
+,'N. N. Mstislavna','N. N. of Moravia','N. N. Petrovna of Poland','N. N. Rostislavna','N. N. Sviatoslavna'
+,'N. N. Vasilkovna','N. N. Volodarovna','N. N. Vsevolodkovna','N. N., daughter of Khan Aepa'
+,'N. N., daughter of Koloman','N. N., daughter of Mstislav Volodimerich','N. N., daughter of the Tsar of Abkhaz'
+,'N. N., grandaughter of Tugorkhan of the Polovcians','Oda of Stade','Peredslava Sviatopolkovna'
+,'Petrovna Mikhailovitsa','Richeza of Poland','Richeza of the German Empire','Rogned\'','Sbyslava Sviatopolkovna'
+,'Second Czech woman of Bohemia','Sofia Iaroslavna','Sviatoslava of Poland','Unknown daughter of Dmitrii Zavidich','Unknown daughter of Ladislaus of Hungary','Unknown Daughter of Mieszko II of Poland','Unknown daughter of Wladyslaw Herman of Poland','Vierchoslava Mstislavna','Vysheslava Sviatoslavna','Zvenislava Vsevolodovna'
+];
   
-var placesArray = ["Bamberg","Bilhorod","Bryansk","Busk","Chernihiv","Constantinople","Cracow","Denmark","Dorohobuzh","Edinburgh","Esztergom",
-  "Gniezno","Halych","Kyiv","London","Mainz","Minsk","Norway","Novgorod","Novhorod-Sivers\'kyi",
-  "Paris","Pereyaslav","Polack","Polovtsy","Przemyśl","Ryazan","Schleswig","Smolensk","Turov","Vermandois","Vladimir-Suzdal","Volodymyr",
-  "Byzantium","Denmark","England","France","German Empire","Hungary","Ossetia","Poland","Rus\'","Scotland","Serbia","Sweden"];
+var placesArray = ["Abkhazia","Amsterdam","Anjou","Bamberg","Bilhorod","Bryansk","Bulgar","Busk","Byzantium","Chernihiv","Constantinople","Cracow","Denmark","Dorohobuzh","Edinburgh","England","Esztergom","France","German Empire","Gniezno","Halych","Hungary","Kyiv","London","Mainz","Minsk"
+,"Norway","Novgorod","Novhorod","Sivers\'kyi","Ossetia","Paris","Peremyshl","Pereyaslav","Polack","Poland","Polovtsy","Raska","Rus\'"
+,"Ryazan","Schleswig","Scotland","Serbia","Smolensk","Stockholm","Sweden","Turov","Vermandois","Vladimir","Suzdal","Volodymyr","Vyshhorod"];
 
-dojo.ready(function () {
-  // to do -- try to create the pulldown automaticaly right now the array has to be updated if data changes 
+dojo.ready(function () {  
   
-  /*
-  "Abkhazia","Amsterdam","Bamberg","Bilhorod","Bryansk","Bulgar","Busk","Chernihiv","Constantinople","Cracow",
-  "Denmark","Dorohobuzh","Edinburgh","Esztergom","Gniezno","Halych","Kyiv","London","Mainz","Minsk","Norway","Novgorod",
-  "Novhorod-Sivers\'kyi","Ossetia","Paris","Pereyaslav","Polack","Polovtsy","Przemyśl","Raska","Ryazan","Schleswig","Smolensk",
-  "Stockholm","Turov","Vermandois","Vladimir-Suzdal","Volodymyr","Vyshhorod"
-  */
-  $.each(husbandArray, function(val, text) {
-    $('select option:contains("Adalbert of Babenberg")').prop('selected',true);
-    $('#dropDownCountry').append( $('<option></option>').val(text).html(text));
-  });
-
-  $.each(placesArray, function(val, text) {
-    //$('select option:contains("Abkhazia")').prop('selected',true);
-    $('#dropDownPlace').append( $('<option></option>').val(text).html(text));
-  });
+  $(window).load(function(){$('#aboutModal').modal('show');});
+  // modal open at window load
+  $.each(husbandArray, function(val, text) {$('#dropDownCountry').append( $('<option></option>').val(text).html(text));});
+  $.each(placesArray, function(val, text) {$('#dropDownPlace').append( $('<option></option>').val(text).html(text));});
   
-  //$('.dropdown-toggle').dropdown();
-  //$('.dropdown-menu').dropdown('toggle');
+  // keep dropdown menu open until a second click is performed
+  $('div.dropdown-menu').on('click', function(event) {event.stopPropagation();});
 
-  /*$('.dropdown-menu').on('hide.bs.dropdown', function () {    
-    return false;
-  });*/
+  $('.selectpicker').selectpicker({container: 'body'});
 
-  /*$("#foo").click(function(e){
-    //do something
-    //e.preventDefault();
-    console.log("foo")
-    $('.selectpicker').selectpicker('show');
-  });
-  */
-  
+  $('body').on('click', function(event) {
+    var target = $(event.target);
+    if (target.parents('.bootstrap-select').length) {
+      event.stopPropagation();
+      $('.bootstrap-select.open').removeClass('open');
+    }
+  }); 
+
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
     $('.selectpicker').selectpicker('mobile');
   }
-  else{$('.selectpicker').selectpicker();}
-  
-  $("#hSlider").slider({});
+  else{$('.selectpicker').selectpicker();}  
   
   $("#about").click(function(e){
     $("#aboutModal").modal("show"); 
     $("body").css("margin-right","0px");
     $(".navbar").css("margin-right","0px");          
   });
-
   
 });
 
@@ -84,13 +83,15 @@ var husbandwifeLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/
 var countryLayer = "http://cga2.cga.harvard.edu/arcgis/rest/services/rusgen/genhusbandwife/MapServer/2";
 
 
-require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/graphic", "esri/symbols/SimpleMarkerSymbol",
+require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "esri/dijit/HomeButton","esri/dijit/Legend", "esri/graphic", "esri/symbols/SimpleMarkerSymbol",
   "esri/symbols/SimpleLineSymbol","esri/symbols/SimpleFillSymbol","esri/renderers/UniqueValueRenderer", "esri/renderers/SimpleRenderer",
   "esri/layers/ArcGISTiledMapServiceLayer", "esri/geometry/Point", "dojo/on", "esri/symbols/TextSymbol","esri/layers/LabelLayer", "esri/Color","dojo/domReady!"], 
-  function(Map, BootstrapMap, FeatureLayer, Legend, Graphic, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, UniqueValueRenderer, SimpleRenderer,
+  function(Map, BootstrapMap, FeatureLayer, HomeButton, Legend, Graphic, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, UniqueValueRenderer, SimpleRenderer,
     ArcGISTiledMapServiceLayer, Point, on, TextSymbol, LabelLayer, Color) {   
     
-    map = BootstrapMap.create("mapDiv",{center: [25, 53.4],zoom: 4, smartNavigation: true});        
+    map = BootstrapMap.create("mapDiv",{center: [25, 53.4],zoom: 4, smartNavigation: true});
+    var home = new HomeButton({map: map}, "HomeButton");
+    home.startup();        
     
     var basemap = new ArcGISTiledMapServiceLayer(basemapURL);    
     
@@ -135,7 +136,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
 
     function initOperationalLayersSecond(){
       var sPlace = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE,6,new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, 
-            new Color([250, 0, 0, 1]),1),new Color([250, 0, 0, 1]));
+            new Color([237, 85, 101, 1]),1),new Color([237, 85, 101, 1]));
       var rsPlace = new UniqueValueRenderer(sPlace);    
       var featurePlaceLayer = new FeatureLayer(placeLayer, {
             mode: FeatureLayer.MODE_SNAPSHOT,
@@ -144,10 +145,9 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
       featurePlaceLayer.setRenderer(rsPlace);
                     
       map.addLayer(featurePlaceLayer);
-      var placeColor = new Color("#ff0000");
+      var placeColor = new Color("#ED5565");
       var placeLabel = new TextSymbol().setColor(placeColor).setOffset(-5,-17).setAlign(TextSymbol.ALIGN_START);
-      //placeLabel.setHorizontalAlignment('right')
-      
+      //placeLabel.setHorizontalAlignment('right')      
       //placeLabel.setOffset(3,3);
       placeLabel.font.setSize("8pt");
       placeLabel.font.setFamily("arial");
@@ -159,7 +159,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
       var pLabels = new LabelLayer({ id: "labels_place" });
       pLabels.addFeatureLayer(featurePlaceLayer, placeLabelRenderer, "{name_stylesheet}");
       map.addLayer(pLabels);
-          // add place layer  
+      // add place layer  
     } 
 
     function initOperationalLayersFirst() {
@@ -181,6 +181,9 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
 
         dojo.connect(map, "onClick", function(e) {
           console.log(e.graphic)
+          $('#dropDownPlace').selectpicker('val', 'Select a Place...');
+          $('#dropDownCountry').selectpicker('val', 'Select a Name...');
+
           map.graphics.clear();
           var centerPoint = new esri.geometry.Point(e.mapPoint.x,e.mapPoint.y,e.mapPoint.spatialReference);
           var mapWidth = map.extent.getWidth();
@@ -194,8 +197,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
           var select = featureLayer.selectFeatures(queryExtent, esri.layers.FeatureLayer.SELECTION_NEW);
           //console.log("query: ", query, select);
           select.then(function(features) {
-              //map.infoWindow.setFeatures(features);
-                
+              //map.infoWindow.setFeatures(features);                
               //map.infoWindow.setContent(features[0].attributes.HusbandNam)
               //map.infoWindow.show(e.mapPoint);
               //var t = features;
@@ -214,6 +216,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
                 bootstrap_alert.info("<ul class='alertCountryInfo'><li><b>Husband:</b> " + features[i].attributes.HusbandNam + "</li><li><b>Place:</b> " + features[i].attributes.HusbandPla + "</li><li><b>Wife:</b> " + features[i].attributes.WifeName + "</li><li><b>Place:</b> " + features[i].attributes.WifePlace + "</li><li><b>Year of Marriage:</b> " + features[i].attributes.YearofMarr + "</li><li><a href='" + features[i].attributes.HusbandPag + "' target=\"_blank\">http://genealogy.obdurodon.org</a></li></ul>");
                 ;
                 //this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+                //setTimeout(function() {$("div.alert").remove();}, 5000);
               };
               //console.log(features)
 
@@ -227,8 +230,56 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
           });
         });
     }
-
-    // slider update data and menu once it stops
+    
+    // time slider 
+    
+    $(function () {
+      $("#range").ionRangeSlider({
+          hide_min_max: true,
+          keyboard: true,
+          min: 980,
+          max: 1209,
+          from: 980,
+          to: 1209,
+          type: 'double',
+          step: 1,
+          prefix: "",
+          grid: true,
+          grid_num: 6,
+          prettify_enabled: false,          
+          onFinish:function (data) {
+            console.log(data.from);
+            updateArray();
+            featureLayer.setDefinitionExpression("year >= " + data.from+ "AND year <=" + data.to);
+            var newHusbandArray = husbandArray;
+            var newPlacesArray = placesArray;
+            //console.log(newHusbandArray) 
+            featureLayer.on("UpdateEnd", function(){
+                var queryLayer = featureLayer.toJson();                   
+                for (var i = queryLayer.featureSet.features.length - 1; i >= 0; i--) {            
+                  console.log(queryLayer.featureSet.features[i].attributes.HusbandPla)
+                  newHusbandArray = $.grep(newHusbandArray, function(value) {
+                    return value != queryLayer.featureSet.features[i].attributes.HusbandNam && value != queryLayer.featureSet.features[i].attributes.WifeName;
+                  });
+                  newPlacesArray = $.grep(newPlacesArray, function(value) {
+                    return value != queryLayer.featureSet.features[i].attributes.HusbandPla && value != queryLayer.featureSet.features[i].attributes.WifePlace
+                    && value != queryLayer.featureSet.features[i].attributes.HusbandKing && value != queryLayer.featureSet.features[i].attributes.WifeKingdo;
+                  });            
+                };          
+                for (var i = newHusbandArray.length - 1; i >= 0; i--) {            
+                  $('#dropDownCountry').children('option[value="'+ newHusbandArray[i] +'"]').hide();            
+                };
+                for (var i = newPlacesArray.length - 1; i >= 0; i--) {            
+                  $('#dropDownPlace').children('option[value="'+ newPlacesArray[i] +'"]').hide();            
+                };
+                
+                $('.selectpicker').selectpicker('refresh')
+              });
+          }
+      });
+    });
+    // slider update data and menu once it stops -- old version
+    /*
     $('#hSlider').slider().on('slideStop', function(evt){      
       hSlideQuery();
       var newHusbandArray = husbandArray;
@@ -265,6 +316,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
       $(".dropdown-toggle").contents()[1].nodeValue = " Years: " + minY + "-" + maxY;
       featureLayer.setDefinitionExpression("year >= " + minY+ "AND year <=" + maxY);            
     }
+    */
 
     function updateArray(){
       for (var i = husbandArray.length - 1; i >= 0; i--) {            
@@ -276,17 +328,18 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
     } 
     // update the dropdwown list once is changed
 
-    $('#dropDownCountry').on('change', function(){husbandSelection();});
+    $('#dropDownCountry').on('change', function(){husbandSelection();$("div.alert").remove();$('#dropDownPlace').selectpicker('val', 'Select a Place...');});
     // looking for a change of the HUSBAND dropdown menu
-    $('#dropDownPlace').on('change', function(){placeSelection();});
+    $('#dropDownPlace').on('change', function(){placeSelection();$("div.alert").remove();$('#dropDownCountry').selectpicker('val', 'Select a Name...');});
     // looking for a change of the PLACE dropdwon menu
     
     function husbandSelection(){
       map.graphics.clear();
-      var minY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[0];
-      var maxY = document.getElementsByClassName('tooltip-inner')[0].childNodes[0].nodeValue.split(" : ")[1];       
+      //var minY = document.getElementsByClassName('irs-from')[0].childNodes[0];
+      //var maxY = document.getElementsByClassName('irs-to')[0].childNodes[0];       
       dojo.forEach(featureLayer.graphics, function(g) {                
-        if ( g.attributes.HusbandNam == $('select option:selected')[0].value && (g.attributes.Year >= minY && g.attributes.Year <= maxY)) {    
+        //if ( g.attributes.HusbandNam == $('select option:selected')[0].value && (g.attributes.Year >= minY && g.attributes.Year <= maxY)) {    
+          if ( g.attributes.HusbandNam == $('select option:selected')[0].value || g.attributes.WifeName == $('select option:selected')[0].value) {    
           // to do change to real shape lenght
           //console.log(g.attributes);
           if(g.attributes.Shape_Length < 10){            
