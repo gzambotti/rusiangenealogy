@@ -125,7 +125,7 @@ require(["esri/map", "application/bootstrapmap", "esri/layers/FeatureLayer", "es
     labels.addFeatureLayer(featureCntyLayer, statesLabelRenderer, "{CNTRY_NAME}");
     // add country layer    
     
-    $('#checkbox2').click(function () {
+    $('#checkboxCountries').click(function () {
       console.log(this.checked);
       if(this.checked == true){map.addLayer(featureCntyLayer);map.addLayer(labels);}
       else{map.removeLayer(featureCntyLayer);map.removeLayer(labels);}  
