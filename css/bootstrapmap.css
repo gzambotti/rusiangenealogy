@@ -237,3 +237,8 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
       z-index: 50;
     }
 
+.HomeButton .home {  
+  background-color: #080808;
+ 
+} 
+
